@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#2.6.6'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>树莓派3B串口配置教程 - CyouGuang&#39;Blog</title>
+  
+    <meta name="keywords" content="树莓派,串口">
+  
+  
+    <meta name="description" content="修改树莓派串口为高速串口">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script>
+	setTimeout(function() {
+	  let script = document.createElement('script');
+	  script.src = "https://www.googletagmanager.com/gtag/js?id=UA-129569508-1";
+	  script.defer=true;
+	  document.body.appendChild(script);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-129569508-1');
+	}, 5000);
+    </script>
+  
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            blog
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2018/11/21/%E6%A0%91%E8%8E%93%E6%B4%BE3B%E4%B8%B2%E5%8F%A3%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/">
+      树莓派3B串口配置教程
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="https://blog.chenyouguang.com" target="_blank" rel="nofollow noopener">
+    <img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/20200310235037.png">
+    <p>CyouGuang</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>树莓派</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Nov 21, 2018</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <h1 id="树莓派3B串口配置教程"><a href="#树莓派3B串口配置教程" class="headerlink" title="树莓派3B串口配置教程"></a>树莓派3B串口配置教程</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>为什么需要配置串口？直接不能用吗？<br>树莓派有两个串口，一个是硬件串口(PL011 UART)，一个是迷你串口(mini-uart),在默认情况下，蓝牙模块会使用PL011串口也就是硬件串口，而迷你串口(mini-uart)用于控制台输出。迷你UART的波特率与VC4 GPU上VPU的核心频率相关联。这意味着当VPU频率调节器改变核心频率时，UART的波特率也会发生变化。这使得UART在默认状态下受限使用。</p>
+</blockquote>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><blockquote>
+<p>本教程将参考官方文档教大家配置<br>树莓派系统: raspbian-stretch</p>
+</blockquote>
+<h2 id="官方文档-英文"><a href="#官方文档-英文" class="headerlink" title="官方文档(英文)"></a>官方文档(英文)</h2><ol>
+<li><a href="https://www.raspberrypi.org/documentation/configuration/uart.md" target="_blank" rel="noopener">官方文档(英文)</a></li>
+<li>树莓派中也有配置文档</li>
+</ol>
+<blockquote>
+<p>到达overlays文件夹</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /boot/overlays</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>查看全部文档</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat README</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>查看单个文档</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dtoverlay -h pi3-miniuart-bt</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里把文档贴出来<br>Name:   pi3-miniuart-bt<br>Info:   Switch Pi3 Bluetooth function to use the mini-UART (ttyS0) and restore UART0/ttyAMA0 over GPIOs 14 &amp; 15. Note that this may reduce the maximum usable baudrate.N.B. It is also necessary to edit /lib/systemd/system/hciuart.service and replace ttyAMA0 with ttyS0, unless you have a system with udev rules that create /dev/serial0 and /dev/serial1, in which case use/dev/serial1 instead because it will always be correct. Furthermore,you must also set core_freq=250 in config.txt or the miniuart will notwork.<br>Usage:  dtoverlay=pi3-miniuart-bt<br>Params:</p>
+</blockquote>
+<h2 id="教程开始"><a href="#教程开始" class="headerlink" title="教程开始"></a>教程开始</h2><h3 id="1-通过SSH连接树莓派"><a href="#1-通过SSH连接树莓派" class="headerlink" title="1. 通过SSH连接树莓派"></a>1. 通过SSH连接树莓派</h3><h3 id="2-查看串口状态"><a href="#2-查看串口状态" class="headerlink" title="2. 查看串口状态"></a>2. 查看串口状态</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /dev</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果将会看到所有接口 找到以下串口</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lrwxrwxrwx 1 root root           7 Nov 21 12:14 serial0 -&gt; ttyS0</span><br><span class="line">lrwxrwxrwx 1 root root           5 Nov 21 12:14 serial1 -&gt; ttyAMA0</span><br></pre></td></tr></table></figure>
+<h3 id="3-关闭板载蓝牙"><a href="#3-关闭板载蓝牙" class="headerlink" title="3. 关闭板载蓝牙"></a>3. 关闭板载蓝牙</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">disable</span> hciuart</span><br></pre></td></tr></table></figure>
+<h3 id="4-修改-hciuart-service"><a href="#4-修改-hciuart-service" class="headerlink" title="4.修改 hciuart.service"></a>4.修改 hciuart.service</h3><blockquote>
+<p>文件路径 /lib/systemd/system/hciuart.service<br>将文件中 ttyAMA0 替换为 ttyS0</p>
+</blockquote>
+<p><strong>如果hciuart.service中没有ttyAMA0可以跳过本步骤！</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /lib/systemd/system/hciuart.service</span><br></pre></td></tr></table></figure>
+<h3 id="5-修改-cmdline-txt"><a href="#5-修改-cmdline-txt" class="headerlink" title="5. 修改 cmdline.txt"></a>5. 修改 cmdline.txt</h3><blockquote>
+<p>文件路径 /boot/cmdline.txt (修改前注意备份)<br>删除掉 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /boot</span><br><span class="line">sudo cp cmdline.txt cmdline.txtbak</span><br><span class="line">vim cmdline.txt</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>修改为以下配置  (参考)</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dwc_otg.lpm_enable=0 console=tty1 root=PARTUUID=d71c341c-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait quiet splash plymouth.ignore-serial-consoles</span><br></pre></td></tr></table></figure>
+<h3 id="6-修改-config-txt"><a href="#6-修改-config-txt" class="headerlink" title="6. 修改 config.txt"></a>6. 修改 config.txt</h3><blockquote>
+<p>文件路径 /boot/config.txt (修改前注意备份)<br>在尾部添加一行 dtoverlay=pi3-miniuart-bt<br>如果存在 dtoverlay=pi3-disable-bt 请在前面加 # 注释掉<br>据说如果同时存在两行串口会不能使用</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /boot</span><br><span class="line">sudo cp config.txt config.txtbak</span><br><span class="line">vim config.txt</span><br></pre></td></tr></table></figure>
+<h3 id="7-重启"><a href="#7-重启" class="headerlink" title="7. 重启"></a>7. 重启</h3><blockquote>
+<p>重启</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>重启后查看串口接口</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ls -l /dev</span><br><span class="line">lrwxrwxrwx 1 root root           7 Nov 21 12:14 serial0 -&gt; ttyAMA0</span><br><span class="line">lrwxrwxrwx 1 root root           5 Nov 21 12:14 serial1 -&gt; ttyS0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果结果一样证明已经配置成功，诺出现不能开机，请自行恢复备份文件！</p>
+</blockquote>
+<hr>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://www.raspberrypi.org/documentation/configuration/uart.md" target="_blank" rel="noopener">https://www.raspberrypi.org/documentation/configuration/uart.md</a></li>
+<li><a href="https://www.jianshu.com/p/12d4f6882371" target="_blank" rel="noopener">https://www.jianshu.com/p/12d4f6882371</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/35312687" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/35312687</a></li>
+<li><a href="https://blog.csdn.net/asukasmallriver/article/details/76851375" target="_blank" rel="noopener">https://blog.csdn.net/asukasmallriver/article/details/76851375</a></li>
+</ul>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://blog.chenyouguang.cn/2018/11/21/%E6%A0%91%E8%8E%93%E6%B4%BE3B%E4%B8%B2%E5%8F%A3%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/>https://blog.chenyouguang.cn/2018/11/21/%E6%A0%91%E8%8E%93%E6%B4%BE3B%E4%B8%B2%E5%8F%A3%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-28T16:29:25+00:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Jun 29, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>树莓派</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E4%B8%B2%E5%8F%A3/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>串口</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.chenyouguang.cn/2018/11/21/%E6%A0%91%E8%8E%93%E6%B4%BE3B%E4%B8%B2%E5%8F%A3%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/&title=树莓派3B串口配置教程 - CyouGuang'Blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.chenyouguang.cn/2018/11/21/%E6%A0%91%E8%8E%93%E6%B4%BE3B%E4%B8%B2%E5%8F%A3%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/&title=树莓派3B串口配置教程 - CyouGuang'Blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://blog.chenyouguang.cn/2018/11/21/%E6%A0%91%E8%8E%93%E6%B4%BE3B%E4%B8%B2%E5%8F%A3%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/&title=树莓派3B串口配置教程 - CyouGuang'Blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2019/03/26/%E8%A7%A3%E5%86%B3Mac%E4%B8%8Bmatplotlib%E4%B8%AD%E6%96%87%E4%B8%8D%E8%83%BD%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>解决Mac下matplotlib中文不能显示问题</p>
+                <p class='content'>未解决前可以看到未解决前，中文字体显示为一个个矩形边框
+
+下载字体首先我们先下载缺失的字体文件，任选一个下载即可fontpalace百度云  提取码: 6m92
+如果您需要对图表商业化使用，下面...</p>
+              </a>
+            
+            
+              <a class='next' href='/2018/06/01/%E4%B8%80%E7%A7%8D%E5%9F%BA%E4%BA%8ERFID%E7%9A%84%E6%97%A0%E4%BA%BA%E5%9B%BE%E4%B9%A6%E9%A6%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/'>
+                <p class='title'>一种基于RFID的无人图书馆解决方案<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>
+​    生活、学习中的图书借阅和归还是比较费时费力的，有时候往往会因为图书馆人流拥挤，闭馆整理或者网电断停等等原因，无法顺利完成图书借阅，借书人和图书馆双方都会因种种不便承受各种损失。为此，...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="utterances">
+            <script src="https://utteranc.es/client.js"
+                    repo="sbtobb/sbtobb.github.io"
+                    issue-term="title"
+                    label="💬Comments"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+                  </script>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '树莓派3B串口配置教程',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#官方文档-英文"><span class="toc-text">官方文档(英文)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#教程开始"><span class="toc-text">教程开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-通过SSH连接树莓派"><span class="toc-text">1. 通过SSH连接树莓派</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-查看串口状态"><span class="toc-text">2. 查看串口状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-关闭板载蓝牙"><span class="toc-text">3. 关闭板载蓝牙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-修改-hciuart-service"><span class="toc-text">4.修改 hciuart.service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-修改-cmdline-txt"><span class="toc-text">5. 修改 cmdline.txt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-修改-config-txt"><span class="toc-text">6. 修改 config.txt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-重启"><span class="toc-text">7. 重启</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="mailto:tobbcyg@gmail.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/sbtobb"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+      
+    
+      
+        Use
+        <a href="https://volantis.js.org/" target="_blank" class="codename">Volantiss</a>
+        as theme, total visits
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          times
+        
+      
+    
+      
+        
+          <div><p><a href="https://www.upyun.com/league" target="_blank" rel="noopener"><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/upaiyun_logo.png" style="zoom: 22%;" /></a></p>
+</div>
+        
+      
+    
+      
+        
+          <div><p><a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">桂ICP备17012097号</a></p>
+</div>
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://blog.chenyouguang.cn">Copyright © 2017-2020 CyouGuang</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

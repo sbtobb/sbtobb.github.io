@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#2.6.6'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>一种基于RFID的无人图书馆解决方案 - CyouGuang&#39;Blog</title>
+  
+    <meta name="keywords" content="无人图书馆,RFID,物联网,云计算">
+  
+  
+    <meta name="description" content="
+​    生活、学习中的图书借阅和归还是比较费时费力的，有时候往往会因为图书馆人流拥挤，闭馆整理或者网电断停等等原因，无法顺利完成图书借阅，借书人和图书馆双方都会因种种不便承受各种损失。为此，基于物联网、无线传感器和云服务计算技术，我设计并开发了一种RFID智慧图书馆系统。">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script>
+	setTimeout(function() {
+	  let script = document.createElement('script');
+	  script.src = "https://www.googletagmanager.com/gtag/js?id=UA-129569508-1";
+	  script.defer=true;
+	  document.body.appendChild(script);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-129569508-1');
+	}, 5000);
+    </script>
+  
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            blog
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2018/06/01/%E4%B8%80%E7%A7%8D%E5%9F%BA%E4%BA%8ERFID%E7%9A%84%E6%97%A0%E4%BA%BA%E5%9B%BE%E4%B9%A6%E9%A6%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+      一种基于RFID的无人图书馆解决方案
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="https://blog.chenyouguang.com" target="_blank" rel="nofollow noopener">
+    <img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/20200310235037.png">
+    <p>CyouGuang</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E7%A0%94%E7%A9%B6%E9%A1%B9%E7%9B%AE/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>研究项目</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Jun 1, 2018</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/0522.388.jpg" alt="成品渲染图"></p>
+<p>​    生活、学习中的图书借阅和归还是比较费时费力的，有时候往往会因为图书馆人流拥挤，闭馆整理或者网电断停等等原因，无法顺利完成图书借阅，借书人和图书馆双方都会因种种不便承受各种损失。为此，基于物联网、无线传感器和云服务计算技术，我设计并开发了一种RFID智慧图书馆系统。<br><a id="more"></a></p>
+<h2 id="1-研究背景"><a href="#1-研究背景" class="headerlink" title="1 研究背景"></a>1 研究背景</h2><p>​    随着人工智能概念的日渐火爆及国家2025规划的推进，传统管理服务行业很难满足广大人群的有效需求。将现代管理及互联网与新一代信息技术应用于无人智能管理服务，最终使广大人群实现生活学习的不断便捷化、高效化。</p>
+<p>​    人工智能，是智能化、自动化、信息化相结合的产物。在全球产业寻求变革的关键时刻，传统服务产业要紧跟时代潮流，结合行业特点，融合互联网特色，摸索出符合自身行业的发展模式才能在这瞬息巨变的时代优质存活并长足发展。</p>
+<p>​    生活、学习中的图书借阅和归还是比较费时费力的，有时候往往会因为图书馆人流拥挤，闭馆整理或者网电断停等等原因，无法顺利完成图书借阅，借书人和图书馆双方都会因种种不便承受各种损失。为此，基于物联网、无线传感器和云服务计算技术，我们开发了RFID智慧图书馆系统。</p>
+<h2 id="2-设计理念"><a href="#2-设计理念" class="headerlink" title="2 设计理念"></a>2 设计理念</h2><p>​    智慧图书馆图书管理系统采用互联网信息处理行业前沿技术，致力于为传统图书馆过渡到现代化智慧图书馆而设计，打造一个方便快捷又能提升用户借阅书籍体验的智慧图书管理系统。简单来说就是将书籍贴上RFID标签并连接上互联网进行数据库信息管理，减少人工管理图书馆的劳动力度，减少书籍的信息误差，尽可能的减少图书馆运营成本，让图书馆高效自行运作起来。</p>
+<h2 id="3-特色和创新"><a href="#3-特色和创新" class="headerlink" title="3 特色和创新"></a>3 特色和创新</h2><p>(<strong>1</strong>)<strong>多元交互界面</strong></p>
+<p>​    相比以往传统书籍借阅，智慧图书馆系统界面风格极具特色，卡通元素，自然景，古典音乐等，流光溢彩，多轮转换。无需总是面对以往馆内沉闷脸孔和肃穆气氛， 大享欢快活泼借阅之旅。</p>
+<p> (<strong>2</strong>)<strong>紧跟人工智能潮流</strong></p>
+<p>​    采用互联网信息处理技术，并进行数据深入分析挖掘。根据用户借阅图书风格和 种类，经过数据分析比对后，在交互界面中展现同类好书推荐和新书尝鲜。</p>
+<p> (<strong>3</strong>)<strong>功能应用模块化设计</strong></p>
+<p>​    针对用户属性开发了管理端和用户端，分开设计。</p>
+<p>​    管理端:管理功能一一俱全，图书借阅信息流量全天候监控，一目了然。用户信 息列表自动检索。终端设备状态实时报告等。</p>
+<p>​    用户端:采用现代支付方式借阅书籍，新颖高效。借阅信息一览无余，归还时间 温馨􏰀醒，并开发书海探奇，书友家园等模块享有多元互动，好书推荐，实用备选， 新书尝鲜等功能。用户借阅之旅不亦乐乎。</p>
+<p> (<strong>4</strong>)<strong>社会效益巨大</strong></p>
+<p>​    通过新型图书借阅模式，科技创新，畅享借阅乐趣，培养阅读爱好，引领阅读风尚，读书求学，经世致用，国民素质不断􏰀升。</p>
+<h2 id="4-系统架构"><a href="#4-系统架构" class="headerlink" title="4 系统架构"></a>4 系统架构</h2><h3 id="4-1-基本架构"><a href="#4-1-基本架构" class="headerlink" title="4.1 基本架构"></a>4.1 基本架构</h3><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/image-20200628010054701.png" alt="图4.1基本架构图" style="zoom:50%;" /></p>
+<p>​    智慧图书馆系统基本架构由4个部分组成：后台管理部分、用户客户端部分、图书设备终端部分、云服务器部分，并由云服务器进行统一数据管理和统计。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/容器图.png" alt="图4.2容器图"></p>
+<p>(1) <strong>后台管理端</strong></p>
+<p>   ​    后台管理端采用网页方式进行管理，使用网页管理拥有非常好跨平台性能。管理员使用任意一个拥有浏览器功能的操作系统进入后台管理系统即可实现全馆图书资料的录入、修改、删除等管理。</p>
+<p>(2) <strong>云端</strong></p>
+<p>   ​    以数据的存储和管理为核心的云计算系统，为应用提供接口，权限控制。使用者可以在任何时间，任何地点，通过任何可连接的装置连接到云端服务器方便的存取数据。</p>
+<p>(3) <strong>图书设备终端</strong></p>
+<p>   ​    无线识别感应器感应 RFID 芯片，把图书整体信息写入超低成本的 RFID 芯片并粘贴在图书中，高聚合融合成一体，可反复使用，供图书终端设备扫描。</p>
+<p>(4) <strong>用户移动客户端</strong></p>
+<p>   ​    用户使用移动客户端，可以识别图书终端设备生成的二维码订单并扫描完成图书借阅和归还，还可以根据用户借阅风格推荐相关书籍，分享读书心得互相交流。</p>
+<h3 id="4-2-系统模型"><a href="#4-2-系统模型" class="headerlink" title="4.2 系统模型"></a>4.2 系统模型</h3><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/物联网模型.png" alt="图4.3物联网模型"></p>
+<p>​    智慧图书馆采用分层分模块化设计，其中通过感知层用来标示和感知事物，是系统使用的入口，将采集到的书籍信息通过网络层，使用无线网络上传至云计算平台 中，在云计算平台搭建自己的服务器，将数据信息进行统一管理和维护。</p>
+<h3 id="4-3-信息传递流程"><a href="#4-3-信息传递流程" class="headerlink" title="4.3 信息传递流程"></a>4.3 信息传递流程</h3><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/信息传递.png" alt="图4.4信息传递图"></p>
+<p>​    用户所持书籍内有RFID电子标签，图书终端设备中的读卡器会自动识别并读取RFID电子标签信息（最多可以同时识别50个电子标签），上传至云服务器中完成信息处理，并生成二维码订单，用户打开手机智慧图书馆移动APP扫描二维码完成订单确认，云服务器就会将用户信息和用户所借阅书籍信息统一管理起来，完成图书借阅。整个图书借阅和图书归还流程都无需人工干预，便于节省人工服务费用，使用机器管理，可以大大延长图书馆开馆时间，降低信息采集错误概率。以传感器、RFID 芯片、云服务器、后台智能管理端以及客户端设备之间的信息数据相互传递为基础，借此来完成实时、高效、快捷、一体化的图书借阅流程，让使用者倍感轻松。</p>
+<p>(1)<strong>借阅图书流程</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/借阅流程.png" alt="图4.5借阅泳道图" style="zoom: 12%;" /></p>
+<p>​    用户在图书馆借阅图书也无需繁琐的操作（如 图3.5借阅流程图 ），仅需要将需要借阅的书籍，带到智慧图书馆设备端读卡器识别区内，读卡器会自动识别书籍中的RFID芯片并采集数据信息上传到云服务器中，同时生成二维码订单返回到设备终端显示器上，用户使用智慧图书馆移动应用扫描二维码，会提示用户完成图书信息订单确认，此后云服务器会将用户和书籍关联起来，录入数据库中，给出提示信息。</p>
+<p>(2)<strong>归还图书流程</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/归还流程.png" alt="图4.6归还流程" style="zoom:12%;" /></p>
+<p>​    用户将待归还的图书通过智慧图书馆设备读卡区，读卡器会自动识别 RFID 信息，并在云服务器中记录图书归还信息，提示用户归还图书成功。</p>
+<h3 id="4-4-云服务器"><a href="#4-4-云服务器" class="headerlink" title="4.4 云服务器"></a>4.4 云服务器</h3><h4 id="4-4-1-云应用架构"><a href="#4-4-1-云应用架构" class="headerlink" title="4.4.1 云应用架构"></a>4.4.1 云应用架构</h4><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/云组件图.png" alt="图4.7云组件图"></p>
+<p>​    云服务器采用Java和SpringBoot框架构建RESTful风格应用编程接口，使用MVC的设计理念，组件化微服务开发，并为不同的应用编写不同的接口控制组件。采用统一登录注册，并对用户身份进行权限验证。图书修改组件、图书查询组件都继承于图书管理组件，且图书修改信息操作需要对管理员的权限进行验证，由图书管理组件连接对象存储系统进行图片管理。订单管理组件用于管理图书订单，每次借阅操作都会创建一个订单，一个订单可以有多本图书。设备管理组件主要用于记录和操作无人图书馆设备硬件端，为图书设备提供访问云数据库的接口。数据库访问组件采用MyBatis作为持久层框架用于访问关系型数据库MySQL，便于存储和管理应用和用户数据。日志组件采用文本日志，对每项关键操作、系统错误进行记录，为开发人员分析数据和恢复数据提供强有力的保障，提升了系统的容错率。</p>
+<h4 id="4-4-2-数据库存储设计"><a href="#4-4-2-数据库存储设计" class="headerlink" title="4.4.2 数据库存储设计"></a>4.4.2 数据库存储设计</h4><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/数据库.png" alt="图4.8数据库存储设计图"></p>
+<p>​    数据库采用目前最受欢迎的开源关系型数据库MySQL。为每个表信息存储建立唯一主键，以及有关联的表之间采用数据库外键进行关联，为以后数据维护提供保障。</p>
+<h4 id="4-4-3-云服务器部署"><a href="#4-4-3-云服务器部署" class="headerlink" title="4.4.3 云服务器部署"></a>4.4.3 云服务器部署</h4><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/云部署图.png" alt="图4.9云部署图"></p>
+<p>​    使用CDN分布式网站站点加速，用户进行请求时，会对用户IP进行解析，采用分布式系统架构和高性能缓存软件，并由最近的CDN服务器进行命中数据，若数据命中即可直接从静态资源库中将资源推向用户，这样将大大减少当个云服务器的流量负担，加快了访问速度，只有未命中的请求会由CDN服务器向源服务器进行请求，同时在流量闲置时会自动检查与源站的数据缓存同步。</p>
+<p>​    智慧图书馆云服务器中采用Docker虚拟化技术，将应用封装到当个容器中，创建私有网桥，仅有互相连接的部分才能访问到网络。反向代理Nginx中的端口是对外界进行监听，再由反向代理进行流量进行分流，静态资源将直接从服务器高速磁盘中读取，应用接口请求会转发到无人图书馆云应用中，再由无人图书馆云应用进行权限校验，对数据库的存储取出，网络之间是互相隐匿的，只有暴露连接部分连通，大大提高了安全性。</p>
+<h3 id="4-5-后台管理网页"><a href="#4-5-后台管理网页" class="headerlink" title="4.5 后台管理网页"></a>4.5 后台管理网页</h3><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/网页功能架构.png" alt="图4.10网页功能架构"></p>
+<p>​    图书馆管理员通过后台管理端对图书馆进行管理，使用Vue前端框架进行页面渲染，后台管理端拥有权限验证用于验证管理员身份，首页控制面板可以对于图书馆的情况一目了然，日销售量，日访问量，支付笔数等等一览无余，使用图书管理模块可以通过图书ISBN号码进行快速添加图书，并为图书添加电子标签。借阅记录的管理，可以通过二维码反馈信息（其中包含借阅人员姓名，借阅时间，借阅书籍资料等）进行借阅记录的保存、排序、整理、检索等，并且能导出表格格式的电子文档，从而实现借阅记录的管理。日志查询可以对用户使用情况进行分析。<br>​    后台管理网页采用前后端分离的开发方式，采用MVVC设计思想，将视图层（View）、显示模型层（ViewModel）、控制层（Control）、模型层（Model）分层，显示层采用Vue框架采用前后端分离等技术实现，使用Webpack技术进行打包，仅需要与服务器请求少量数据，大大减少服务器负载，再由前端框架进行本地的页面渲染，路由切换等等，页面切换基本无延迟，拥有良好的用户体验。</p>
+<h3 id="4-6-移动应用端"><a href="#4-6-移动应用端" class="headerlink" title="4.6 移动应用端"></a>4.6 移动应用端</h3><h4 id="4-6-1-信息关联"><a href="#4-6-1-信息关联" class="headerlink" title="4.6.1 信息关联"></a>4.6.1 信息关联</h4><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/移动应用.png" alt="图4.11移动应用" style="zoom: 20%;" /></p>
+<p>​    智慧图书设备读取到图书中的RFID芯片信息后，服务器将会把书籍的信息与一个新创建的订单关联，并且生成一个包含订单信息的二维码，此时用户打开智慧图书馆移动应用，使用扫一扫功能，扫描订单二维码，然后会向云服务器发送用户的唯一标示信息，此时云服务器就会将用户和订单关联起来完成借阅。<br>​    移动应用端作为智慧图书馆的用户入口，其主要的功能是标示用户，将用户和所借阅的图书关联起来。</p>
+<h4 id="4-6-2-生态圈"><a href="#4-6-2-生态圈" class="headerlink" title="4.6.2 生态圈"></a>4.6.2 生态圈</h4><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/移动应用生态.png" alt="图4.12移动应用生态" style="zoom:14%;" /></p>
+<p>​    生态圈的建立对于应用来说是重中之重的，主要是通过用户参与各项活动，并且活动之间又互相关联。智慧图书馆生态社区主要是四大部分：图书推荐、图书借阅、读书心得分享、社区建设。用户使用智慧图书管理系统进行借阅后，可以在移动应用中分享自己的读书心得体会，并在社区中向大家分享，其他用户也同样参与讨论与分享，即可通过社区分享分析猜测用户可能喜爱的书籍，并向用户进行推荐图书，用户查阅到相关图书信息，就会有大概率进行再次借阅。</p>
+<p>​    智慧图书馆的建设离不开用户的参与，移动应用作为智慧图书馆用户的入口，必定拥有较多的用户流量，通过建立智慧图书馆生态社区，更有利于增加用户粘性，使得更多的用户参与进来，从而达到良性循环。</p>
+<h3 id="4-7-图书设备端"><a href="#4-7-图书设备端" class="headerlink" title="4.7 图书设备端"></a>4.7 图书设备端</h3><h4 id="4-7-1-设计方向"><a href="#4-7-1-设计方向" class="headerlink" title="4.7.1 设计方向"></a>4.7.1 设计方向</h4><p>​    智慧图书馆设备端是用于感知用户将要借阅的图书信息，同时将识别到的信息通过网络传递给云服务器，由云服务器进行订单的生成，并返回二维码信息，再由设备端进行显示，等待用户进行扫描二维码。</p>
+<h4 id="4-7-2-功能架构"><a href="#4-7-2-功能架构" class="headerlink" title="4.7.2 功能架构"></a>4.7.2 功能架构</h4><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/设备端架构.png" alt="图4.13设备端架构"></p>
+<p>(1)<strong>技术选型</strong></p>
+<p>​    智慧图书馆设备端的主控选为树莓派3B，树莓派可以运行Linux系统，并有丰富的接口设计，4个USB接口、HDMI显示接口、40针GPIO控制针，非常利于进行嵌入式开发。</p>
+<p>​    智慧图书馆设备应用使用Java进行开发，Java有非常好的跨平台特点，以及不错的执行速度，并且有丰富的社区支持。</p>
+<p>​    用户界面采用网页的形式，使用Vue前端框架进行构建，可以利用网页就能轻松构建较为丰富的用户界面交互。</p>
+<p>(2)<strong>信息传递流程</strong></p>
+<p>​    由智慧图书馆设备应用中的标签信息中间件通过串口协议RS232与RFID标签读卡器进行数据通信。当有RFID电子标签在RFID标签读卡器的识别访问内时，将会源源不断的将标签信息传递到标签信息中间件，由中间件对这些信息进行过滤处理，将错误、重复的传输包进行丢弃。将多个的标签信息加入到消息队列中，并逐个上传到服务器中创建订单，服务器返回订单二维码信息，再由WebSocket通信向前端进行消息发送，前端再进行页面的刷新渲染。</p>
+<h2 id="5-成果展示"><a href="#5-成果展示" class="headerlink" title="5 成果展示"></a>5 成果展示</h2><h3 id="5-1-设备端"><a href="#5-1-设备端" class="headerlink" title="5.1 设备端"></a>5.1 设备端</h3><div class="gallery ">
+              <p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/设备图片1.png" alt="设备图片1"></p><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/设备图片2-20200628164552713.png" alt="设备图片2"></p><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/pc3.png" alt="设备图片3"></p>
+            </div>
+<h3 id="5-2-后台管理"><a href="#5-2-后台管理" class="headerlink" title="5.2 后台管理"></a>5.2 后台管理</h3><div class="gallery ">
+              <p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/dashborad.png" alt="dashborad"></p><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/书籍管理.png" alt="书籍管理"></p>
+            </div>
+<h3 id="5-3-手机端"><a href="#5-3-手机端" class="headerlink" title="5.3 手机端"></a>5.3 手机端</h3><div class="gallery ">
+              <p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/035B06EE32F3EDC4FDFD494952571E58.png" alt="035B06EE32F3EDC4FDFD494952571E58"></p><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/推荐书单.png" alt="推荐书单"></p><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/A1350221DAD4D963DD9E70BA202A732F.png" alt="A1350221DAD4D963DD9E70BA202A732F"></p><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/F5ECEC472AD929C075EB7A7BC928657A.png" alt="F5ECEC472AD929C075EB7A7BC928657A"></p><p><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/FC23E12B3E3ACCBCFDC7BDD61FB84645.png" alt="FC23E12B3E3ACCBCFDC7BDD61FB84645"></p>
+            </div>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://blog.chenyouguang.cn/2018/06/01/%E4%B8%80%E7%A7%8D%E5%9F%BA%E4%BA%8ERFID%E7%9A%84%E6%97%A0%E4%BA%BA%E5%9B%BE%E4%B9%A6%E9%A6%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>https://blog.chenyouguang.cn/2018/06/01/%E4%B8%80%E7%A7%8D%E5%9F%BA%E4%BA%8ERFID%E7%9A%84%E6%97%A0%E4%BA%BA%E5%9B%BE%E4%B9%A6%E9%A6%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-27T11:23:19+00:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Jun 27, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%97%A0%E4%BA%BA%E5%9B%BE%E4%B9%A6%E9%A6%86/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>无人图书馆</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/RFID/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>RFID</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%89%A9%E8%81%94%E7%BD%91/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>物联网</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>云计算</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.chenyouguang.cn/2018/06/01/%E4%B8%80%E7%A7%8D%E5%9F%BA%E4%BA%8ERFID%E7%9A%84%E6%97%A0%E4%BA%BA%E5%9B%BE%E4%B9%A6%E9%A6%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/&title=一种基于RFID的无人图书馆解决方案 - CyouGuang'Blog&summary=
+​    生活、学习中的图书借阅和归还是比较费时费力的，有时候往往会因为图书馆人流拥挤，闭馆整理或者网电断停等等原因，无法顺利完成图书借阅，借书人和图书馆双方都会因种种不便承受各种损失。为此，基于物联网、无线传感器和云服务计算技术，我设计并开发了一种RFID智慧图书馆系统。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://blog.chenyouguang.cn/2018/06/01/%E4%B8%80%E7%A7%8D%E5%9F%BA%E4%BA%8ERFID%E7%9A%84%E6%97%A0%E4%BA%BA%E5%9B%BE%E4%B9%A6%E9%A6%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/&title=一种基于RFID的无人图书馆解决方案 - CyouGuang'Blog&summary=
+​    生活、学习中的图书借阅和归还是比较费时费力的，有时候往往会因为图书馆人流拥挤，闭馆整理或者网电断停等等原因，无法顺利完成图书借阅，借书人和图书馆双方都会因种种不便承受各种损失。为此，基于物联网、无线传感器和云服务计算技术，我设计并开发了一种RFID智慧图书馆系统。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://blog.chenyouguang.cn/2018/06/01/%E4%B8%80%E7%A7%8D%E5%9F%BA%E4%BA%8ERFID%E7%9A%84%E6%97%A0%E4%BA%BA%E5%9B%BE%E4%B9%A6%E9%A6%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/&title=一种基于RFID的无人图书馆解决方案 - CyouGuang'Blog&summary=
+​    生活、学习中的图书借阅和归还是比较费时费力的，有时候往往会因为图书馆人流拥挤，闭馆整理或者网电断停等等原因，无法顺利完成图书借阅，借书人和图书馆双方都会因种种不便承受各种损失。为此，基于物联网、无线传感器和云服务计算技术，我设计并开发了一种RFID智慧图书馆系统。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2018/11/21/%E6%A0%91%E8%8E%93%E6%B4%BE3B%E4%B8%B2%E5%8F%A3%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>树莓派3B串口配置教程</p>
+                <p class='content'>树莓派3B串口配置教程前言
+为什么需要配置串口？直接不能用吗？树莓派有两个串口，一个是硬件串口(PL011 UART)，一个是迷你串口(mini-uart),在默认情况下，蓝牙模块会使用PL01...</p>
+              </a>
+            
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="utterances">
+            <script src="https://utteranc.es/client.js"
+                    repo="sbtobb/sbtobb.github.io"
+                    issue-term="title"
+                    label="💬Comments"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+                  </script>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '一种基于RFID的无人图书馆解决方案',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-研究背景"><span class="toc-text">1 研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-设计理念"><span class="toc-text">2 设计理念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-特色和创新"><span class="toc-text">3 特色和创新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-系统架构"><span class="toc-text">4 系统架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-基本架构"><span class="toc-text">4.1 基本架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-系统模型"><span class="toc-text">4.2 系统模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-信息传递流程"><span class="toc-text">4.3 信息传递流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-云服务器"><span class="toc-text">4.4 云服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-1-云应用架构"><span class="toc-text">4.4.1 云应用架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-2-数据库存储设计"><span class="toc-text">4.4.2 数据库存储设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-3-云服务器部署"><span class="toc-text">4.4.3 云服务器部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-后台管理网页"><span class="toc-text">4.5 后台管理网页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-移动应用端"><span class="toc-text">4.6 移动应用端</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-6-1-信息关联"><span class="toc-text">4.6.1 信息关联</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-6-2-生态圈"><span class="toc-text">4.6.2 生态圈</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-图书设备端"><span class="toc-text">4.7 图书设备端</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-7-1-设计方向"><span class="toc-text">4.7.1 设计方向</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-7-2-功能架构"><span class="toc-text">4.7.2 功能架构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-成果展示"><span class="toc-text">5 成果展示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-设备端"><span class="toc-text">5.1 设备端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-后台管理"><span class="toc-text">5.2 后台管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-手机端"><span class="toc-text">5.3 手机端</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="mailto:tobbcyg@gmail.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/sbtobb"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+      
+    
+      
+        Use
+        <a href="https://volantis.js.org/" target="_blank" class="codename">Volantiss</a>
+        as theme, total visits
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          times
+        
+      
+    
+      
+        
+          <div><p><a href="https://www.upyun.com/league" target="_blank" rel="noopener"><img src="https://cdn.jsdelivr.net/gh/sbtobb/CDN/blog/upaiyun_logo.png" style="zoom: 22%;" /></a></p>
+</div>
+        
+      
+    
+      
+        
+          <div><p><a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">桂ICP备17012097号</a></p>
+</div>
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://blog.chenyouguang.cn">Copyright © 2017-2020 CyouGuang</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
